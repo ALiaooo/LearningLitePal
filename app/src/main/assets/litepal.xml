@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="Questionnaire"/>
+
+    <version value="1"></version>
+
+    <list>
+        <mapping class="com.aliao.learninglitepal.entity.SurveyInfo"></mapping>
+        <mapping class="com.aliao.learninglitepal.entity.UserInfo"></mapping>
+    </list>
+
+</litepal>
