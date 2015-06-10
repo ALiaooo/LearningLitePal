@@ -6,17 +6,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.aliao.litepal.LitePalApplication;
 
 /**
- * Created by 丽双 on 2015/6/9.
+ * Created by 涓藉弻 on 2015/6/9.
  */
 public class LitePalOpenHelper extends SQLiteOpenHelper{
 
     public LitePalOpenHelper(String name,int version) {
-        //将数据库名及版本号传给父类SQLiteOpenHelper
+        //灏嗘暟鎹簱鍚嶅強鐗堟湰鍙蜂紶缁欑埗绫籗QLiteOpenHelper
         super(LitePalApplication.getContext(), name, null, version);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        Generator.create(db);
     }
 
     @Override

@@ -16,8 +16,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
- * Created by 丽双 on 2015/6/9.
- * 该类使用SAX来解析litepal.xml文件
+ * Created by 涓藉弻 on 2015/6/9.
+ * 璇ョ被浣跨敤SAX鏉ヨВ鏋恖itepal.xml鏂囦欢
  */
 public class LitePalParser {
 
@@ -50,7 +50,7 @@ public class LitePalParser {
     }
 
     /**
-     * 获取读取litepal.xml文件的输入流
+     * 鑾峰彇璇诲彇litepal.xml鏂囦欢鐨勮緭鍏ユ祦
      * @return
      */
     private InputStream getConfigInputStream(){

@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/aliao/learninglitepal/entity/SurveyInfo.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/aliao/learninglitepal/entity/UserInfo.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/LitePalApplication.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/parser/LitePalAttr.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/parser/LitePalContentHandler.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/parser/LitePalParser.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/tablemanager/Connector.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/tablemanager/LitePalOpenHelper.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/litepal/src/main/java/com/aliao/litepal/util/Const.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

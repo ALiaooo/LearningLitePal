@@ -10,19 +10,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by ÀöË« on 2015/6/9.
+ * Created by ä¸½åŒ on 2015/6/9.
  */
 public class LitePalAttr {
 
     private static LitePalAttr litePalAttr;
 
-    //Êı¾İ¿â°æ±¾ºÅ
+    //æ•°æ®åº“ç‰ˆæœ¬å·
     private int version;
-    //Êı¾İ¿âÃû
+    //æ•°æ®åº“å
     private String dbName;
-    //ËùÓĞÔÚÊı¾İ¿âÖĞÏëÒªÓĞÓ³Éä¹ØÏµµÄÊµÌåÀà
+    //æ‰€æœ‰åœ¨æ•°æ®åº“ä¸­æƒ³è¦æœ‰æ˜ å°„å…³ç³»çš„å®ä½“ç±»
     private List<String> classNames;
-    //±íÃû£¬ÁĞÃû¼°sql´óĞ¡Ğ´
+    //è¡¨åï¼Œåˆ—ååŠsqlå¤§å°å†™
     private String cases;
 
     public int getVersion() {
@@ -42,8 +42,8 @@ public class LitePalAttr {
     }
 
     /**
-     * ÔÚsqliteÀïtable_schema±íÊ¾×Ô¶¯Éú³ÉµÄ£¬ÕâÀïÒ»¶¨ÒªÊÖ¶¯Ìí¼Ó½øÈ¥
-     * table_schemaÓÃÀ´²é¿´Êı¾İ¿âµÄÔªÊı¾İ£¬ÕâÀïµÄÔªÊı¾İ°üÀ¨±íÃû¼°±íÀàĞÍ
+     * åœ¨sqliteé‡Œtable_schemaè¡¨ç¤ºè‡ªåŠ¨ç”Ÿæˆçš„ï¼Œè¿™é‡Œä¸€å®šè¦æ‰‹åŠ¨æ·»åŠ è¿›å»
+     * table_schemaç”¨æ¥æŸ¥çœ‹æ•°æ®åº“çš„å…ƒæ•°æ®ï¼Œè¿™é‡Œçš„å…ƒæ•°æ®åŒ…æ‹¬è¡¨ååŠè¡¨ç±»å‹
      * @return
      */
     public List<String> getClassNames() {
@@ -61,8 +61,8 @@ public class LitePalAttr {
     }
 
     /**
-     * ÕâÀïÓÃË«ÖØ¼ì²âÀ´ÊµÏÖµ¥ÀıÄ£Ê½
-     * Õû¸ö³ÌĞò´´½¨Ò»¸öÎ¨Ò»µÄlitePalAttr¶ÔÏó£¬¿ÉÒÔÍ¨¹ıÕâ¸ö¶ÔÏóÄÃµ½Êı¾İ¿âµÄ»ù±¾ĞÅÏ¢
+     * è¿™é‡Œç”¨åŒé‡æ£€æµ‹æ¥å®ç°å•ä¾‹æ¨¡å¼
+     * æ•´ä¸ªç¨‹åºåˆ›å»ºä¸€ä¸ªå”¯ä¸€çš„litePalAttrå¯¹è±¡ï¼Œå¯ä»¥é€šè¿‡è¿™ä¸ªå¯¹è±¡æ‹¿åˆ°æ•°æ®åº“çš„åŸºæœ¬ä¿¡æ¯
      * @return
      */
     public static LitePalAttr getIntance(){
@@ -115,6 +115,6 @@ public class LitePalAttr {
 
     @Override
     public String toString() {
-        return "Êı¾İ¿âÃû³Æ:"+dbName+"\nÊı¾İ¿â°æ±¾:"+version+"\n\nÊı¾İ¿âÓ³Éä¶ÔÏóÀàÃû:";
+        return "æ•°æ®åº“åç§°:"+dbName+"\næ•°æ®åº“ç‰ˆæœ¬:"+version+"\n\næ•°æ®åº“æ˜ å°„å¯¹è±¡ç±»å:";
     }
 }

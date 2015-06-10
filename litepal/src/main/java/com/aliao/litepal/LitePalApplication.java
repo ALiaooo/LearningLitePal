@@ -6,7 +6,7 @@ import android.content.Context;
 import com.aliao.litepal.exceptions.GlobalException;
 
 /**
- * Created by ÀöË« on 2015/6/9.
+ * Created by ä¸½åŒ on 2015/6/9.
  */
 public class LitePalApplication extends Application {
     private static Context sContext;

@@ -5,7 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * Created by ÀöË« on 2015/6/9.
+ * Created by ä¸½åŒ on 2015/6/9.
  */
 public class LitePalContentHandler  extends DefaultHandler {
 
@@ -14,7 +14,7 @@ public class LitePalContentHandler  extends DefaultHandler {
     @Override
     public void startDocument() throws SAXException {
         litePalAttr = LitePalAttr.getIntance();
-        litePalAttr.getClassNames().clear();//ÒòÎªlitePalAttrÊÇ¾²Ì¬µÄ£¬ËùÒÔÈç¹ûÔÙ´Î½øĞĞ½âÎöÒªÇå¿ÕÖ®Ç°µÄÊı¾İ
+        litePalAttr.getClassNames().clear();//å› ä¸ºlitePalAttræ˜¯é™æ€çš„ï¼Œæ‰€ä»¥å¦‚æœå†æ¬¡è¿›è¡Œè§£æè¦æ¸…ç©ºä¹‹å‰çš„æ•°æ®
     }
 
     @Override

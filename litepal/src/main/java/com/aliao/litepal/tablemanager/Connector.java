@@ -7,8 +7,8 @@ import com.aliao.litepal.parser.LitePalAttr;
 import com.aliao.litepal.parser.LitePalParser;
 
 /**
- * Created by ÀöË« on 2015/6/9.
- * Í¨¹ı¸ÃÀàÈ¥Á¬½ÓÊı¾İ¿â£¬Ê¹ÓÃ¸ÃµÃµ½Êı¾İ¿âµÄÊµÀı¶ÔÏó
+ * Created by ä¸½åŒ on 2015/6/9.
+ * é€šè¿‡è¯¥ç±»å»è¿æ¥æ•°æ®åº“ï¼Œä½¿ç”¨è¯¥å¾—åˆ°æ•°æ®åº“çš„å®ä¾‹å¯¹è±¡
  */
 public class Connector {
 
@@ -26,8 +26,8 @@ public class Connector {
     }
 
     /**
-     * 1.Æô¶¯¶Ôlitepal.xmlµÄ½âÎö
-     * 2.´´½¨LitePalOpenHelperÊµÀı¶ÔÏó
+     * 1.å¯åŠ¨å¯¹litepal.xmlçš„è§£æ
+     * 2.åˆ›å»ºLitePalOpenHelperå®ä¾‹å¯¹è±¡
      * @return
      */
     private static LitePalOpenHelper buildConnection() {
