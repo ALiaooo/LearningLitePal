@@ -9,11 +9,11 @@ import java.util.Set;
  */
 public class TableModel {
 
+    //表名
     private String tableName;
-
-    //列表是key，列的类型是value
+    //列名是key，列的类型是value
     private Map<String, String> columnsMap = new HashMap<>();
-
+    //类名。去掉了包名前缀的类名
     private String className;
 
     public String getTableName() {

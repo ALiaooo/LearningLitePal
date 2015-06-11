@@ -1,5 +1,10 @@
 package com.aliao.litepal.util;
 
+import com.aliao.litepal.parser.LitePalAttr;
+
+import java.util.Collection;
+import java.util.Locale;
+
 /**
  * Created by 丽双 on 2015/6/10.
  */
@@ -36,5 +41,56 @@ public class BaseUtility {
             return true;
         }
         return false;
+    }
+
+    /**
+     * 根据litepal.xml配置的大小写来设置
+     * @param string
+     * @return
+     */
+    public static String changeCase(String string){
+        if (string != null){
+            LitePalAttr litePalAttr = LitePalAttr.getIntance();
+            String cases = litePalAttr.getCases();
+            if (Const.LitePal.CASES_KEEP.equals(cases)){
+                return string;
+            }else if (Const.LitePal.CASES_UPPER.equals(cases)){
+                return string.toUpperCase(Locale.US);
+            }
+            return string.toLowerCase(Locale.US);
+        }
+        return null;
+    }
+
+
+    /**
+     * This helper method makes up the shortage of contains method in Collection
+     * to support the function of case insensitive contains. It only supports
+     * the String generic type of collection, cause other types have no cases
+     * concept.
+     *
+     * @param collection
+     *            The collection contains string data.
+     * @param string
+     *            The string want to look for in the collection.
+     * @return If the string is in the collection without case concern return
+     *         true, otherwise return false. If the collection is null, return
+     *         false.
+     */
+    public static boolean containsIgnoreCases(Collection<String> collection, String string) {
+        if (collection == null) {
+            return false;
+        }
+        if (string == null) {
+            return collection.contains(null);
+        }
+        boolean contains = false;
+        for (String element : collection) {
+            if (string.equalsIgnoreCase(element)) {
+                contains = true;
+                break;
+            }
+        }
+        return contains;
     }
 }

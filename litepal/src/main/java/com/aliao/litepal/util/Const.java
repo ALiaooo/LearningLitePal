@@ -31,4 +31,32 @@ public class Const {
          */
         public static final String CONFIGURATION_FILE_NAME = "litepal.xml";
     }
+
+
+    public interface TableSchema {
+        /**
+         * Table name in database.
+         */
+        public static final String TABLE_NAME = "table_schema";
+
+        /**
+         * The name column in table_schema.
+         */
+        public static final String COLUMN_NAME = "name";
+
+        /**
+         * The type column in table_schema.
+         */
+        public static final String COLUMN_TYPE = "type";
+
+        /**
+         * Constant for normal table.
+         */
+        public static final int NORMAL_TABLE = 0;
+
+        /**
+         * Constant for intermediate join table.
+         */
+        public static final int INTERMEDIATE_JOIN_TABLE = 1;
+    }
 }
