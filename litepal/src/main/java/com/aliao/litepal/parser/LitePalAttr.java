@@ -49,9 +49,9 @@ public class LitePalAttr {
     public List<String> getClassNames() {
         if (classNames == null){
             classNames = new ArrayList<>();
-            classNames.add("com.aliao.parser.entity.Table_Schema");
+            classNames.add("com.aliao.litepal.model.Table_Schema");
         }else if (classNames.isEmpty()){
-            classNames.add("com.aliao.parser.entity.Table_Schema");
+            classNames.add("com.aliao.litepal.model.Table_Schema");
         }
         return classNames;
     }

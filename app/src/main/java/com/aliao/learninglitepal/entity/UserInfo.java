@@ -1,13 +1,12 @@
 package com.aliao.learninglitepal.entity;
 
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Aspsine on 2015/4/28.
- * 用户
+ * Created by 丽双 on 2015/6/5.
+ * 用户表
  */
 public class UserInfo implements Serializable {
     private long id;
@@ -75,15 +74,4 @@ public class UserInfo implements Serializable {
         this.surveyInfos = surveyInfos;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "UserInfo{" +
-                "iUserID='" + userId + '\'' +
-                ", sUserName='" + userName + '\'' +
-                ", dPermissionEndTime='" + permissionEndTime + '\'' +
-                ", sRealName='" + realName + '\'' +
-                '}';
-    }
 }
