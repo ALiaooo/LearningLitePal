@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.TextUtils;
 
 import com.aliao.litepal.exceptions.DatabaseGenerateException;
+import com.aliao.litepal.tablemanager.model.TableModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,4 +80,104 @@ public class DBUtility {
         }
         return tableNames;
     }
+
+
+
+    /**
+     * Test if a column exists in a table. Cases are ignored.
+     *
+     * @param columnName
+     *            The column name.
+     * @param tableName
+     *            The table name.
+     * @param db
+     *            Instance of SQLiteDatabase.
+     * @return If there's a column named as the column name passed in, return
+     *         true. Or return false. If any of the passed in parameters is null
+     *         or empty, return false.
+     */
+    public static boolean isColumnExists(String columnName, String tableName, SQLiteDatabase db) {
+        if (TextUtils.isEmpty(columnName) || TextUtils.isEmpty(tableName)) {
+            return false;
+        }
+        boolean exist = false;
+        try {
+            exist = BaseUtility.containsIgnoreCases(findPragmaTableInfo(tableName, db)
+                    .getColumnNames(), columnName);
+        } catch (Exception e) {
+            e.printStackTrace();
+            exist = false;
+        }
+        return exist;
+    }
+
+
+    /**
+     * Look from the database to find a table named same as the table name in
+     * table model. Then iterate the columns and types of this table to create a
+     * new instance of table model. If there's no such a table in the database,
+     * then throw DatabaseGenerateException.
+     *
+     * @param tableName
+     *            Table name.
+     * @param db
+     *            Instance of SQLiteDatabase.
+     * @return A table model object with values from database table.
+     * @throws com.aliao.litepal.exceptions.DatabaseGenerateException
+     */
+    public static TableModel findPragmaTableInfo(String tableName, SQLiteDatabase db) {
+        if (isTableExists(tableName, db)) {
+            TableModel tableModelDB = new TableModel();
+            tableModelDB.setTableName(tableName);
+            String checkingColumnSQL = "pragma table_info(" + tableName + ")";
+            Cursor cursor = null;
+            try {
+                cursor = db.rawQuery(checkingColumnSQL, null);
+                if (cursor.moveToFirst()) {
+                    do {
+                        String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                        String type = cursor.getString(cursor.getColumnIndexOrThrow("type"));
+                        tableModelDB.addColumns(name, type);
+                    } while (cursor.moveToNext());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new DatabaseGenerateException(e.getMessage());
+            } finally {
+                if (cursor != null) {
+                    cursor.close();
+                }
+            }
+            return tableModelDB;
+        } else {
+            throw new DatabaseGenerateException(
+                    DatabaseGenerateException.TABLE_DOES_NOT_EXIST_WHEN_EXECUTING + tableName);
+        }
+    }
+
+    /**
+     * Create intermediate join table name by the concatenation of the two
+     * target table names in alphabetical order with underline in the middle.
+     *
+     * @param tableName
+     *            First table name.
+     * @param associatedTableName
+     *            The associated table name.
+     * @return The table name by the concatenation of the two target table names
+     *         in alphabetical order with underline in the middle. If the table
+     *         name or associated table name is null of empty, return null.
+     */
+    public static String getIntermediateTableName(String tableName, String associatedTableName) {
+        if (!(TextUtils.isEmpty(tableName) || TextUtils.isEmpty(associatedTableName))) {
+            String intermediateTableName = null;
+            if (tableName.toLowerCase().compareTo(associatedTableName.toLowerCase()) <= 0) {
+                intermediateTableName = tableName + "_" + associatedTableName;
+            } else {
+                intermediateTableName = associatedTableName + "_" + tableName;
+            }
+            return intermediateTableName;
+        }
+        return null;
+    }
+
 }

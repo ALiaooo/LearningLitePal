@@ -31,7 +31,7 @@ import java.util.Set;
 /**
  * Created by 丽双 on 2015/6/10.
  */
-public class Creator {
+public class Creator extends AssociationCreator {
 
     private Collection<TableModel> mTableModels;
 
@@ -40,7 +40,8 @@ public class Creator {
      * @param db
      * @param force
      */
-    protected void createOrUpgradeTable(SQLiteDatabase db, boolean force){
+    @Override
+    protected void createOrUpgradeTable(SQLiteDatabase db, boolean force) {
         for (TableModel tableModel:getAllTableModels()){
             execute(getCreateTableSQLs(tableModel, db, force), db);
             giveTableSchemaACopy(tableModel.getTableName(), Const.TableSchema.NORMAL_TABLE, db);
@@ -139,87 +140,6 @@ public class Creator {
         return mTableModels.size() == LitePalAttr.getIntance().getClassNames().size();
     }
 
-    /**
-     * 将新创建的表的表名备份到table_schema中
-     * @param tableName
-     * @param tableType
-     * @param db
-     */
-    protected void giveTableSchemaACopy(String tableName, int tableType, SQLiteDatabase db) {
-        StringBuilder sql = new StringBuilder("select * from ");
-        sql.append(Const.TableSchema.TABLE_NAME);
-
-        Cursor cursor = null;
-        try {
-            cursor = db.rawQuery(sql.toString(), null);
-            if (isNeedtoGiveACopy(cursor, tableName)) {
-                ContentValues values = new ContentValues();
-                values.put(Const.TableSchema.COLUMN_NAME, BaseUtility.changeCase(tableName));
-                values.put(Const.TableSchema.COLUMN_TYPE, tableType);
-                db.insert(Const.TableSchema.TABLE_NAME, null, values);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (cursor != null) {
-                cursor.close();
-            }
-        }
-    }
-
-
-    /**
-     * Save the name of a created table into table_schema, but there're some
-     * extra rules. Each table name should be only saved once, and special
-     * tables will not be saved.
-     *
-     * @param cursor
-     *            The cursor used to iterator values in the table.
-     * @param tableName
-     *            The table name.
-     * @return If all rules are passed return true, any of them failed return
-     *         false.
-     */
-    private boolean isNeedtoGiveACopy(Cursor cursor, String tableName) {
-        return !isValueExists(cursor, tableName) && !isSpecialTable(tableName);
-    }
-
-    /**
-     * Judge the table name has already exist in the table_schema or not.
-     *
-     * @param cursor
-     *            The cursor used to iterator values in the table.
-     * @param tableName
-     *            The table name.
-     * @return If value exists return true, or return false.
-     */
-    private boolean isValueExists(Cursor cursor, String tableName) {
-        boolean exist = false;
-        if (cursor.moveToFirst()) {
-            do {
-                String name = cursor.getString(cursor
-                        .getColumnIndexOrThrow(Const.TableSchema.COLUMN_NAME));
-                if (name.equalsIgnoreCase(tableName)) {
-                    exist = true;
-                    break;
-                }
-            } while (cursor.moveToNext());
-        }
-        return exist;
-    }
-
-    /**
-     * Judge a table is a special table or not. Currently table_schema is a
-     * special table.
-     *
-     * @param tableName
-     *            The table name.
-     * @return Return true if it's special table.
-     */
-    private boolean isSpecialTable(String tableName) {
-        return Const.TableSchema.TABLE_NAME.equalsIgnoreCase(tableName);
-    }
-
 
     /**
      * 批量执行sql语句来创建表
@@ -261,71 +181,6 @@ public class Creator {
             }
         }
     }
-
-    /**
-     * 生成一个删除表的sql语句
-     * @param tableModel
-     * @return
-     */
-    private String generateDropTableSQL(TableModel tableModel) {
-        return generateDropTableSQL(tableModel.getTableName());
-    }
-    protected String generateDropTableSQL(String tableName) {
-        return "drop table if exists " + tableName;
-    }
-
-    /**
-     * 生成一个创建表的sql语句
-     * @param tableModel
-     * @return
-     */
-    private String generateCreateTableSQL(TableModel tableModel) {
-        return generateCreateTableSQL(tableModel.getTableName(), tableModel.getColumns(), true);
-    }
-    protected String generateCreateTableSQL(String tableName, Map<String, String> columnsMap,boolean autoIncrementId) {
-        Set<String> columnNames = columnsMap.keySet();
-        //判断集合里是有含有id或_id的列名，如果有则删除。防止生成两个id列，因为每个sql语句会自己创建id列作为主键
-        removeId(columnNames);
-        StringBuilder createTableSQL = new StringBuilder("create table ");
-        createTableSQL.append(tableName).append(" (");
-        //创建id作为主键，autoIncrementId总是true
-        if (autoIncrementId){
-            createTableSQL.append("id integer primary key autoincrement,");
-        }
-        //判断有没有列名，没有列名就把刚拼接的sql语句最后那个逗号给去了
-        Iterator<String> i = columnNames.iterator();
-        if (!i.hasNext()){
-            createTableSQL.deleteCharAt(createTableSQL.length() - 1);
-        }
-        boolean needSeparator = false;
-        while (i.hasNext()){
-            if (needSeparator){
-                createTableSQL.append(", ");
-            }
-            needSeparator = true;
-            String columnName = i.next();
-            createTableSQL.append(columnName).append(" ").append(columnsMap.get(columnName));
-        }
-        createTableSQL.append(")");
-        return createTableSQL.toString();
-    }
-
-    private void removeId(Set<String> columnNames) {
-        String idName = "";
-        for (String columnName : columnNames) {
-            if (isIdColumn(columnName)) {
-                idName = columnName;
-                break;
-            }
-        }
-        if (!TextUtils.isEmpty(idName)) {
-            columnNames.remove(idName);
-        }
-    }
-    protected boolean isIdColumn(String columnName) {
-        return "_id".equalsIgnoreCase(columnName) || "id".equalsIgnoreCase(columnName);
-    }
-
 
 
 }

@@ -5,6 +5,25 @@ package com.aliao.litepal.util;
  */
 public class Const {
 
+
+    public interface Model {
+        /**
+         * One2One constant value.
+         */
+        public static final int ONE_TO_ONE = 1;
+
+        /**
+         * Many2One constant value.
+         */
+        public static final int MANY_TO_ONE = 2;
+
+        /**
+         * Many2Many constant value.
+         */
+        public static final int MANY_TO_MANY = 3;
+    }
+
+
     public interface LitePal {
         /**
          * The suffix for each database file.
