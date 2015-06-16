@@ -1,11 +1,13 @@
 package com.aliao.learninglitepal.entity;
 
+import com.aliao.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 /**
  * Created by 丽双 on 2015/4/23.
  * 问卷基本信息
  */
-public class SurveyInfo {
+public class SurveyInfo extends DataSupport {
 
     private long id;
     private String surveyId;//问卷id

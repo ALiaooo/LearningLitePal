@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.aliao.learninglitepal.entity.SurveyInfo;
 import com.aliao.litepal.tablemanager.Connector;
 
 
@@ -18,6 +19,20 @@ public class MainActivity extends ActionBarActivity {
         Connector.getDatabase();
         TextView title = (TextView) findViewById(R.id.tvTitle);
         title.setText("test db create");
+        handleDB();
+    }
+
+    private void handleDB() {
+        save();
+
+    }
+
+    private void save() {
+        //存储一条问卷信息
+        SurveyInfo surveyInfo = new SurveyInfo();
+        surveyInfo.setSurveyId("1000");
+        surveyInfo.setTitle("租户满意度调查");
+        surveyInfo.save();
     }
 
     @Override
