@@ -227,7 +227,7 @@ public abstract class AssociationCreator extends Generator{
 
     private String generateAddColunmSQL(String tableName, String colunmName, String columnType) {
         StringBuilder addColumnSQL = new StringBuilder();
-        addColumnSQL.append("alter table").
+        addColumnSQL.append("alter table ").
                 append(tableName).
                 append(" add column ").
                 append(colunmName).
@@ -255,8 +255,7 @@ public abstract class AssociationCreator extends Generator{
     }
 
     private String getForeignKeyColumnName(String tableName) {
-
-        return null;
+        return BaseUtility.changeCase(tableName + "_id");
     }
 
     protected Collection<AssociationsModel> getAllAssociations(){
@@ -444,9 +443,9 @@ public abstract class AssociationCreator extends Generator{
      */
     private void addIntoAssociationModelCollection(String className, String associatedClassName, String classHoldsForeignKey, int associationType) {
         AssociationsModel associationsModel = new AssociationsModel();
-        associationsModel.setTableName(className);
-        associationsModel.setAssociatedTableName(associatedClassName);
-        associationsModel.setTableHoldsForeignKey(classHoldsForeignKey);
+        associationsModel.setTableName(DBUtility.getTableNameByClassName(className));
+        associationsModel.setAssociatedTableName(DBUtility.getTableNameByClassName(associatedClassName));
+        associationsModel.setTableHoldsForeignKey(DBUtility.getTableNameByClassName(classHoldsForeignKey));
         associationsModel.setAssociationType(associationType);
         mAssociationModels.add(associationsModel);
     }

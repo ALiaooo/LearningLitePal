@@ -5,7 +5,7 @@ import java.io.Serializable;
  * Created by 丽双 on 2015/4/23.
  * 问卷基本信息
  */
-public class SurveyInfo implements Serializable {
+public class SurveyInfo {
 
     private long id;
     private String surveyId;//问卷id
@@ -15,8 +15,17 @@ public class SurveyInfo implements Serializable {
     private String companyName;//服务企业
     private String updateTime;
     private String collectEndTime;//问卷过期时间
-
     private String uploadTotal;//上传总份数
+   /* private UserInfo userInfo;
+
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }*/
+
 
     public String getUploadTotal() {
         return uploadTotal;
