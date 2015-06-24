@@ -3,6 +3,7 @@ package com.aliao.litepal.crud;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.aliao.litepal.tablemanager.Connector;
+import com.aliao.litepal.util.BaseUtility;
 
 /**
  * Created by 丽双 on 2015/6/16.
@@ -15,9 +16,17 @@ import com.aliao.litepal.tablemanager.Connector;
  */
 public class DataSupport {
 
+    /**
+     * 每个model的唯一标识。LitePal会自动生成其值。不要去指定他的值或者修改他。
+     */
+    private long baseObjId;
+
 
     protected String getClassName() {
         return getClass().getName();
+    }
+    protected String getTableName(){
+        return BaseUtility.changeCase(getClass().getSimpleName());//getClass().getSimpleName()得到的是去包名的类名
     }
 
     public synchronized boolean save(){
@@ -37,7 +46,12 @@ public class DataSupport {
         SaveHandler saveHandler = new SaveHandler(db);
         saveHandler.onSave(this);
 
+        //还有代码
 
 
+    }
+
+    public boolean isSaved() {
+        return baseObjId > 0;
     }
 }
